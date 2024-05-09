@@ -1,4 +1,4 @@
-package txtparsing;
+package src.txtparsing;
 
 import utils.IO;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.List;
 
 public class TXTParsing {
 
-    public static List<txtparsing.MyDoc> parse(String file) throws Exception {
+    public static List<src.txtparsing.MyDoc> parse(String file) throws Exception {
         try{
             //Parse txt file
             String txt_file = IO.ReadEntireFileIntoAString(file);
