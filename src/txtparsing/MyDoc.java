@@ -3,47 +3,38 @@ package src.txtparsing;
 
 public class MyDoc {
 
-    private String title;
-    private String caption;
-    private String mesh;
+    private int docID;
+    private String text;
 
-    public MyDoc(String title, String caption, String mesh) {
-        this.title = title;
-        this.caption = caption;
-        this.mesh = mesh;
+
+    public MyDoc(int docID, String text) {
+        this.docID = docID;
+        this.text = text;
     }
 
     @Override
     public String toString() {
         String ret = "MyDoc{"
-                + "\n\tTitle: " + title
-                + "\n\tCaption: " + caption
-                + "\n\tMesh: " + mesh;
+                + "\n\tDocument ID " + docID
+                + "\n\tText " + text ;
         return ret + "\n}";
     }
 
     //---- Getters & Setters definition ----
-    public String getTitle() {
-        return title;
+    public int getID() {
+        return docID;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setID(int id) {
+        this.docID = id;
     }
 
-    public String getCaption() {
-        return caption;
+    public String getText() {
+        return text;
     }
 
-    public void setCaption(String caption) {
-        this.caption = caption;
+    public void setText(String caption) {
+        this.text = caption;
     }
 
-    public String getMesh() {
-        return mesh;
-    }
-
-    public void setMesh(String mesh) {
-        this.mesh = mesh;
-    }
 }
