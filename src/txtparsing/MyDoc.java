@@ -1,4 +1,4 @@
-package src.txtparsing;
+package txtparsing;
 
 
 public class MyDoc {

@@ -1,4 +1,4 @@
-package src.txtparsing;
+package txtparsing;
 
 import utils.IO;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TXTParsing {
 
-    public static List<src.txtparsing.MyDoc> parse(String file) throws Exception {
+    public static List<txtparsing.MyDoc> parse(String file) throws Exception {
         try {
             // Parse txt file
             String txt_file = IO.ReadEntireFileIntoAString(file);
@@ -22,8 +22,6 @@ public class TXTParsing {
                 if (parts.length == 2) {
                     String docID = parts[0].trim();
                     String text = parts[1].trim();
-                    System.out.println("Document ID: " + docID);
-                    System.out.println("Text: " + text);
                     parsed_docs.add(new MyDoc(Integer.parseInt(docID), text));
                 }
             }

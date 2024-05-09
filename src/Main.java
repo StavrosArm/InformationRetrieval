@@ -1,7 +1,6 @@
-package src;
 
-import src.txtparsing.TXTParsing;
-import src.txtparsing.MyDoc;
+import txtparsing.TXTParsing;
+import txtparsing.MyDoc;
 import java.util.List;
 
 
@@ -25,7 +24,7 @@ public class Main {
                 System.out.println("Text: " + doc.getText());
                 System.out.println("---------------------------------------");
             }
-
+            System.out.println(parsedDocs.size());
         } else {
             System.out.println("No documents parsed.");
         }
