@@ -121,10 +121,8 @@ public class IndexerDemo {
             Document doc = new Document();
             
             // create the fields of the document and add them to the document
-            StoredField title = new StoredField("title", mydoc.getID());
-            doc.add(title);
-            StoredField caption = new StoredField("caption", mydoc.getText());
-            doc.add(caption);
+            StoredField docID = new StoredField("Document ID", mydoc.getID());
+            doc.add(docID);
             String fullSearchableText = mydoc.getID() + " " + mydoc.getText();            
             TextField text = new TextField("text", fullSearchableText, Field.Store.NO);
             doc.add(text);
