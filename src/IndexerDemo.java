@@ -55,15 +55,15 @@ import txtparsing.*;
  * @author Tonia Kyriakopoulou
  */
 public class IndexerDemo {
-    
+    static String  filepath = System.getProperty("user.dir"); // user dir gives the directory the projects is in
     /**
      * Configures IndexWriter.
      * Creates a lucene's inverted index.
      *
      */
     public IndexerDemo() throws Exception{
-        
-        String txtfile =  "docs//documents.txt"; //txt file to be parsed and indexed, it contains one document per line
+        String txtfile =  "\\docs\\documents.txt";
+        //String txtfile =  "docs//documents.txt"; //txt file to be parsed and indexed, it contains one document per line
         String indexLocation = ("index"); //define were to store the index        
         
         Date start = new Date();
@@ -87,7 +87,7 @@ public class IndexerDemo {
             IndexWriter indexWriter = new IndexWriter(dir, iwc);
             
             // parse txt document using TXT parser and index it
-            List<MyDoc> docs = TXTParsing.parse(txtfile);
+            List<MyDoc> docs = TXTParsing.parse(filepath + txtfile);
             for (MyDoc doc : docs){
                 indexDoc(indexWriter, doc);
             }

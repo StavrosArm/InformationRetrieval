@@ -6,6 +6,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.nio.file.Paths;
+import java.util.List;
+import java.nio.file.Files;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
@@ -20,12 +22,15 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.similarities.ClassicSimilarity;
 import org.apache.lucene.store.FSDirectory;
 
+import txtparsing.MyDoc;
+import txtparsing.TXTParsing;
+
 /**
  *
  * @author Tonia Kyriakopoulou
  */
 public class SearcherDemo {
-    
+    static String filepath = System.getProperty("user.dir");
     public SearcherDemo(){
         try{
             String indexLocation = ("index"); //define where the index is stored
@@ -58,11 +63,58 @@ public class SearcherDemo {
             QueryParser parser = new QueryParser(field, analyzer);
             
             // read user's query from stdin
+            /* 
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Enter query or 'q' to quit: ");
             System.out.print(">>");
             String line = br.readLine();
+            */
+            
+            BufferedWriter writer = new BufferedWriter(new FileWriter("search_results.txt"));
+            List<String> querry = TXTParsing.parseQuerry(filepath + "\\docs\\queries.txt"); //takes the querry.txt and creates a List containing only the querrys
+            int question = 1;
+            for (String q : querry){
 
+                // parse the query according to QueryParser
+                Query query = parser.parse(q);
+                System.out.println("Searching for: " + query.toString(field));
+                
+                // search the index using the indexSearcher
+                TopDocs results = indexSearcher.search(query, 50);
+                ScoreDoc[] hits = results.scoreDocs;
+                long numTotalHits = results.totalHits;
+                System.out.println(numTotalHits + " total matching documents");
+
+                //display results
+                for(int i=0; i<hits.length; i++){
+                    Document hitDoc = indexSearcher.doc(hits[i].doc);
+                    System.out.println("\tScore "+hits[i].score +" Document ID="+hitDoc.get("Document ID"));
+                    //String resultLine = String.format("%s Q0 %s %d %f", "Q"+question, hitDoc.get("Document ID"), i+1, hits[i].score);
+                    String resultLine = String.format("%s %s %d %f", "Q"+question, hitDoc.get("Document ID"), i+1, hits[i].score);
+                    writer.write(resultLine);
+                    writer.newLine();
+                }
+                
+
+
+
+
+
+
+                question++;
+                //System.out.println(q);
+            }
+            writer.close();
+
+            
+
+
+
+
+
+
+
+            /* 
             BufferedWriter writer = new BufferedWriter(new FileWriter("search_results.txt"));
 
             int question=1;
@@ -92,6 +144,7 @@ public class SearcherDemo {
 
                 question++;
             }
+            */
             
         } catch(Exception e){
             e.printStackTrace();
