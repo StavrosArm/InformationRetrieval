@@ -86,20 +86,19 @@ public class SearcherDemo {
                 System.out.println(numTotalHits + " total matching documents");
 
                 //display results
+                
+                String qid="qid:Q"+question;
+                //writer.write(qid);
+                //writer.newLine();
                 for(int i=0; i<hits.length; i++){
                     Document hitDoc = indexSearcher.doc(hits[i].doc);
                     System.out.println("\tScore "+hits[i].score +" Document ID="+hitDoc.get("Document ID"));
                     //String resultLine = String.format("%s Q0 %s %d %f", "Q"+question, hitDoc.get("Document ID"), i+1, hits[i].score);
-                    String resultLine = String.format("%s %s %d %f", "Q"+question, hitDoc.get("Document ID"), i+1, hits[i].score);
+                    String resultLine = String.format("%s %s %s %d %f %s", "Q" + question, "Q0", hitDoc.get("Document ID"), i+1, hits[i].score, "run-1");
                     writer.write(resultLine);
                     writer.newLine();
                 }
                 
-
-
-
-
-
 
                 question++;
                 //System.out.println(q);
