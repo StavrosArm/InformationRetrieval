@@ -94,9 +94,16 @@ public class SearcherDemo {
                     Document hitDoc = indexSearcher.doc(hits[i].doc);
                     System.out.println("\tScore "+hits[i].score +" Document ID="+hitDoc.get("Document ID"));
                     //String resultLine = String.format("%s Q0 %s %d %f", "Q"+question, hitDoc.get("Document ID"), i+1, hits[i].score);
-                    String resultLine = String.format("%s %s %s %d %f %s", "Q" + question, "Q0", hitDoc.get("Document ID"), i+1, hits[i].score, "run-1");
-                    writer.write(resultLine);
-                    writer.newLine();
+                    if (question!=10){
+                        String resultLine = String.format("%s %s %s %d %f %s", "Q0" + question, "Q0", hitDoc.get("Document ID"), i+1, hits[i].score, "run-1");
+                        writer.write(resultLine);
+                        writer.newLine();
+                    }else{
+                        String resultLine = String.format("%s %s %s %d %f %s", "Q" + question, "Q0", hitDoc.get("Document ID"), i+1, hits[i].score, "run-1");
+                        writer.write(resultLine);
+                        writer.newLine();
+                    }
+                    
                 }
                 
 
